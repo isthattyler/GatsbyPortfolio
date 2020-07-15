@@ -4,9 +4,9 @@
   display: flex;
   align-items: center;
   border-bottom: 0px;
-  background: $white-color;
+  background: $dark-blue;
   font-weight: 400;
-  color: $dark-blue-text;
+  color: $white-color;
   padding: 0rem 5.6rem;
   margin-bottom: 0;
   top: 0;
@@ -62,4 +62,34 @@
       }
     }
   }
+
+  .go-next i {
+    color: $white-color;
+    margin: 1rem 0 $default-font-size;
+    bottom: 0;
+    left: 50%;
+    position: absolute;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+  
+    &:hover {
+      color: $primary-color;
+	    border-color: $secondary-color;
+    }
+  }
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
 }

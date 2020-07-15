@@ -65,6 +65,8 @@
   cursor: pointer;
 
   &:hover {
-    transform: translateY(-2px);
+    color: $primary-color;
+	  border-color: $secondary-color;
+    transform: rotate(360deg)
   }
 }

@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import Typical from 'react-typical';
 import { Container } from 'react-bootstrap';
 import Fade from 'react-reveal/Fade';
 import { Link } from 'react-scroll';
@@ -30,16 +31,36 @@ const Header = () => {
             <span className="text-color-main">{name || 'Your Name'}</span>
             <br />
             {subtitle || "I'm the Unknown Developer."}
+            <Typical
+              steps={[
+                700,
+                ' developer @VISTECH 💻',
+                2000,
+                'n Open Sourcer ✅',
+                2000,
+                ' stock investor 📈‍',
+                2000,
+              ]}
+              loop={Infinity}
+              wrapper="span"
+            />
           </h1>
         </Fade>
         <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={1000} distance="30px">
-          <p className="hero-cta">
+          {/* <p className="hero-cta">
             <span className="cta-btn cta-btn--hero">
               <Link to="about" smooth duration={1000}>
                 {cta || 'Know more'}
               </Link>
             </span>
-          </p>
+          </p> */}
+          <span className="go-next">
+            <div className="bounce">
+              <Link to="about" smooth duration={1000}>
+                <i className="fa fa-angle-down fa-2x" aria-hidden="true" />
+              </Link>
+            </div>
+          </span>
         </Fade>
       </Container>
     </section>
