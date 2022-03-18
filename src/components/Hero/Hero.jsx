@@ -37,7 +37,7 @@ const Header = () => {
                 2000,
                 'an Open Sourcer ✅',
                 2000,
-                'a stock investor 📈‍',
+                'a stock investor 📈',
                 2000,
               ]}
               loop={Infinity}
