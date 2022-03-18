@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import Fade from 'react-reveal/Fade';
 import { Container } from 'react-bootstrap';
+import Fade from 'react-reveal/Fade';
 import PortfolioContext from '../../context/context';
 import Title from '../Title/Title';
 
@@ -21,7 +21,7 @@ const Contact = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="cta-btn cta-btn--resume"
-              href={email ? `mailto:${email}` : 'https://github.com/cobidev/react-simplefolio'}
+              href={email ? `mailto:${email}` : '#'}
             >
               {btn || "Let's Talk"}
             </a>

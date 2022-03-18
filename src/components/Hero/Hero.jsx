@@ -33,12 +33,11 @@ const Header = () => {
             {subtitle || "I'm the Unknown Developer."}
             <Typical
               steps={[
-                700,
-                ' developer @VISTECH 💻',
+                'a developer @Optum 💻',
                 2000,
-                'n Open Sourcer ✅',
+                'an Open Sourcer ✅',
                 2000,
-                ' stock investor 📈‍',
+                'a stock investor 📈‍',
                 2000,
               ]}
               loop={Infinity}
