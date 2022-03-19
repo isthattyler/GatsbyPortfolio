@@ -16,5 +16,6 @@ module.exports = {
     'react/require-default-props': 'off',
     'no-unused-vars': 'warn',
   },
-  parser: 'babel-eslint',
+  parser: '@babel-eslint-parser',
+  requireConfigFile: false,
 };
