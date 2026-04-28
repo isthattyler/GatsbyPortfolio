@@ -6,7 +6,7 @@ const AboutImg = ({ filename, alt }) => {
     <div className="about-image-wrapper">
       <div className="about-image-glow" />
       <img
-        src={`/src/images/Profile/${filename}`}
+        src={`/images/Profile/${filename}`}
         alt={alt}
         className="about-image"
       />
