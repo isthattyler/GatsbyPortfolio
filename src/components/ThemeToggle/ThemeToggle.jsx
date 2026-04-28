@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState('dark');
@@ -22,7 +22,7 @@ const ThemeToggle = () => {
   if (!mounted) {
     return (
       <button className="theme-toggle" aria-label="Toggle theme">
-        <Sun size={20} />
+        <FiSun size={20} />
       </button>
     );
   }
@@ -33,7 +33,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
-      {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+      {theme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
     </button>
   );
 };

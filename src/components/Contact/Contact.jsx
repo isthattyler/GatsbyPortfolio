@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, ArrowRight } from 'lucide-react';
+import { FaEnvelope, FaArrowRight } from 'react-icons/fa';
 import PortfolioContext from '../../context/context';
 
 const Contact = () => {
@@ -26,9 +26,9 @@ const Contact = () => {
           href={email ? `mailto:${email}` : '#'}
           className="contact__magnetic-btn"
         >
-          <Mail size={20} />
+          <FaEnvelope size={20} />
           <span>{btn || 'Email Me'}</span>
-          <ArrowRight size={20} />
+          <FaArrowRight size={20} />
         </a>
 
         <p className="contact__email">

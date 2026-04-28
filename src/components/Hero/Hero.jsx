@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { FiChevronDown } from 'react-icons/fi';
+import { FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-scroll';
-import { ChevronDown, ArrowRight } from 'lucide-react';
 import AboutImg from '../Image/AboutImg';
 
 const TypewriterText = ({ texts, delay = 0 }) => {
@@ -107,7 +108,7 @@ const Hero = () => {
             className="hero__cta"
           >
             <span>Get in touch</span>
-            <ArrowRight size={18} />
+            <FaArrowRight size={18} />
           </a>
         </motion.div>
       </motion.div>
@@ -119,7 +120,7 @@ const Hero = () => {
         transition={{ delay: 1.5, duration: 0.5 }}
       >
         <span>Scroll</span>
-        <ChevronDown size={20} />
+        <FiChevronDown size={20} />
       </motion.div>
     </section>
   );

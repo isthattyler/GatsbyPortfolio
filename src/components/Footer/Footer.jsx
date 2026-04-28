@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-scroll';
-import { Github, Linkedin, ArrowUp } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaArrowUp } from 'react-icons/fa';
 import PortfolioContext from '../../context/context';
 
 const Footer = () => {
@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="footer__social">
           {networks.map((network) => {
             const { id, name, url } = network;
-            const Icon = name === 'github' ? Github : Linkedin;
+            const Icon = name === 'github' ? FaGithub : FaLinkedin;
 
             return (
               <a
@@ -39,7 +39,7 @@ const Footer = () => {
           className="footer__back-to-top"
           aria-label="Back to top"
         >
-          <ArrowUp size={18} />
+          <FaArrowUp size={18} />
         </Link>
 
         <p className="footer__copyright">

@@ -1,23 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Server, Database } from 'lucide-react';
+import { FaCode, FaServer, FaDatabase } from 'react-icons/fa';
 
 const skillsData = [
   {
     category: 'Languages & Core Tools',
-    icon: Code,
+    icon: FaCode,
     items: ['Java', 'Python', 'SQL', 'Bash'],
     description: 'My daily drivers for building and shipping software.',
   },
   {
     category: 'Frameworks & Libraries',
-    icon: Server,
+    icon: FaServer,
     items: ['Spring Boot', 'React JS'],
     description: 'Spring Boot for scalable backend services, React for interactive frontends.',
   },
   {
     category: 'Data & Infrastructure',
-    icon: Database,
+    icon: FaDatabase,
     items: ['PostgreSQL', 'MongoDB'],
     description: 'Comfortable in Linux environments and love a good shell script.',
   },

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { HiOutlineExternalLink } from 'react-icons/hi';
 import PortfolioContext from '../../context/context';
 import AboutImg from '../Image/AboutImg';
 
@@ -84,7 +84,7 @@ const About = () => {
               className="about__resume-btn"
             >
               <span>View Resume</span>
-              <ExternalLink size={18} />
+              <HiOutlineExternalLink size={18} />
             </a>
           )}
         </motion.div>

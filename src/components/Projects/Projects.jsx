@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
+import { HiOutlineExternalLink } from 'react-icons/hi';
 import PortfolioContext from '../../context/context';
 
 const containerVariants = {
@@ -105,7 +106,7 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="project-card__link project-card__link--primary"
                       >
-                        <Github size={16} />
+                        <FaGithub size={16} />
                         <span>Source</span>
                       </a>
                     )}
@@ -116,7 +117,7 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="project-card__link"
                       >
-                        <ExternalLink size={16} />
+                        <HiOutlineExternalLink size={16} />
                         <span>Live</span>
                       </a>
                     )}
