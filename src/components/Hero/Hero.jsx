@@ -1,69 +1,127 @@
-import React, { useContext, useState, useEffect } from 'react';
-import Typical from 'react-typical';
-import { Container } from 'react-bootstrap';
-import Fade from 'react-reveal/Fade';
-import { Link } from 'react-scroll';
-import PortfolioContext from '../../context/context';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { FiChevronDown } from 'react-icons/fi';
+import { FaArrowRight } from 'react-icons/fa';
 
-const Header = () => {
-  const { hero } = useContext(PortfolioContext);
-  const { title, name, subtitle, cta } = hero;
-
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+const TypewriterText = ({ texts, delay = 0 }) => {
+  const [displayText, setDisplayText] = useState('');
+  const [textIndex, setTextIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (window.innerWidth > 769) {
-      setIsDesktop(true);
-      setIsMobile(false);
-    } else {
-      setIsMobile(true);
-      setIsDesktop(false);
-    }
-  }, []);
+    const timeout = setTimeout(() => {
+      const currentText = texts[textIndex];
+
+      if (!isDeleting) {
+        setDisplayText(currentText.substring(0, displayText.length + 1));
+
+        if (displayText.length === currentText.length) {
+          setTimeout(() => setIsDeleting(true), 2000);
+          return;
+        }
+      } else {
+        setDisplayText(currentText.substring(0, displayText.length - 1));
+
+        if (displayText.length === 0) {
+          setIsDeleting(false);
+          setTextIndex((prev) => (prev + 1) % texts.length);
+        }
+      }
+    }, isDeleting ? 50 : 100);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, textIndex, texts]);
 
   return (
-    <section id="hero" className="jumbotron">
-      <Container>
-        <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={500} distance="30px">
-          <h1 className="hero-title">
-            {title || 'Hi, my name is'}{' '}
-            <span className="text-color-main">{name || 'Your Name'}</span>
-            <br />
-            {subtitle || "I'm the Unknown Developer."}
-            <Typical
-              steps={[
-                'a developer @Optum 💻',
-                2000,
-                'an Open Sourcer ✅',
-                2000,
-                'a stock investor 📈',
-                2000,
-              ]}
-              loop={Infinity}
-              wrapper="span"
-            />
-          </h1>
-        </Fade>
-        <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={1000} distance="30px">
-          {/* <p className="hero-cta">
-            <span className="cta-btn cta-btn--hero">
-              <Link to="about" smooth duration={1000}>
-                {cta || 'Know more'}
-              </Link>
-            </span>
-          </p> */}
-          <span className="go-next">
-            <div className="bounce">
-              <Link to="about" smooth duration={1000}>
-                <i className="fa fa-angle-down fa-2x" aria-hidden="true" />
-              </Link>
-            </div>
-          </span>
-        </Fade>
-      </Container>
+    <span className="hero__typewriter">
+      {displayText}
+      <span className="cursor" />
+    </span>
+  );
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const Hero = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkWidth = () => {
+      setIsDesktop(window.innerWidth > 768);
+    };
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    return () => window.removeEventListener('resize', checkWidth);
+  }, []);
+
+  const typewriterTexts = ['Java Developer', 'Backend Engineer', 'Problem Solver'];
+
+  return (
+    <section id="hero" className="hero">
+      <div className="hero__grid-bg" />
+
+      <motion.div
+        className="hero__content"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div className="hero__label" variants={itemVariants}>
+          Software Engineer
+        </motion.div>
+
+        <motion.h1 className="hero__title" variants={itemVariants}>
+          Hi, I'm{' '}
+          <span className="name">Tyler</span>
+        </motion.h1>
+
+        <motion.div variants={itemVariants}>
+          <TypewriterText texts={typewriterTexts} delay={0.5} />
+        </motion.div>
+
+        <motion.div variants={itemVariants}>
+          <a
+            href="mailto:tyler7nguyen@duck.com"
+            className="hero__cta"
+          >
+            <span>Get in touch</span>
+            <FaArrowRight size={18} />
+          </a>
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        className="hero__scroll-indicator"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+      >
+        <span>Scroll</span>
+        <FiChevronDown size={20} />
+      </motion.div>
     </section>
   );
 };
 
-export default Header;
+export default Hero;

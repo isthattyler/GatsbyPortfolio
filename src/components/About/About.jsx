@@ -1,70 +1,97 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import Fade from 'react-reveal/Fade';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { HiOutlineExternalLink } from 'react-icons/hi';
 import PortfolioContext from '../../context/context';
 import AboutImg from '../Image/AboutImg';
-import Title from '../Title/Title';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const imageVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 const About = () => {
-  const { about } = useContext(PortfolioContext);
-  const { img, paragraphOne, paragraphTwo, paragraphThree, resume } = about;
+  const { about } = React.useContext(PortfolioContext);
+  const { img, paragraphOne, paragraphTwo, paragraphThree, resume } = about || {};
 
   const [isDesktop, setIsDesktop] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (window.innerWidth > 769) {
-      setIsDesktop(true);
-      setIsMobile(false);
-    } else {
-      setIsMobile(true);
-      setIsDesktop(false);
-    }
+    const checkWidth = () => {
+      setIsDesktop(window.innerWidth > 900);
+    };
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    return () => window.removeEventListener('resize', checkWidth);
   }, []);
 
   return (
-    <section id="about">
-      <Container>
-        <Title title="About Me" />
-        <Row className="about-wrapper">
-          <Col md={6} sm={12}>
-            <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={1000} distance="30px">
-              <div className="about-wrapper__info">
-                <p className="about-wrapper__info-text">
-                  {paragraphOne ||
-                    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi neque, ipsa animi maiores repellendu distinctioaperiam earum dolor voluptatum consequatur blanditiis inventore debitis fuga numquam voluptate architecto itaque molestiae.'}
-                </p>
-                <p className="about-wrapper__info-text">
-                  {paragraphTwo ||
-                    'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi neque, ipsa animi maiores repellendu distinctioaperiam earum dolor voluptatum consequatur blanditiis inventore debitis fuga numquam voluptate architecto itaque molestiae.'}
-                </p>
-                <p className="about-wrapper__info-text">
-                  {paragraphThree || 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.'}
-                </p>
-                {resume && (
-                  <span className="d-flex mt-3">
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="cta-btn cta-btn--resume"
-                      href={resume}
-                    >
-                      Resume
-                    </a>
-                  </span>
-                )}
-              </div>
-            </Fade>
-          </Col>
-          <Col md={6} sm={12}>
-            <Fade bottom duration={1000} delay={600} distance="30px">
-              <div className="about-wrapper__image">
-                <AboutImg alt="profile picture" filename={img} />
-              </div>
-            </Fade>
-          </Col>
-        </Row>
-      </Container>
+    <section id="about" className="about">
+      <motion.div
+        className="about__container"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div className="about__content" variants={itemVariants}>
+          <span className="about__intro">About me</span>
+          <h2 className="about__title">Turning complex problems into clean, reliable systems</h2>
+
+          <p className="about__description">{paragraphOne}</p>
+          <p className="about__description">{paragraphTwo}</p>
+          <p className="about__description">{paragraphThree}</p>
+
+          <div className="about__details">
+            <span className="about__detail">UConn Computer Science Graduate</span>
+            <span className="about__detail">Currently @Optum as Software Engineer</span>
+            <span className="about__detail">Backend-focused with full-stack capabilities</span>
+          </div>
+
+          {resume && (
+            <a
+              href={resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="about__resume-btn"
+            >
+              <span>View Resume</span>
+              <HiOutlineExternalLink size={18} />
+            </a>
+          )}
+        </motion.div>
+
+        <motion.div className="about__visual" variants={imageVariants}>
+          <AboutImg alt="Tyler Nguyen" filename={img} />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
