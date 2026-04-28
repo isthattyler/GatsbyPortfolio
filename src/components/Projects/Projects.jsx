@@ -1,118 +1,132 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import Fade from 'react-reveal/Fade';
-import Tilt from 'react-tilt';
+import React, { useContext } from 'react';
+import { motion } from 'framer-motion';
+import { Github, ExternalLink } from 'lucide-react';
 import PortfolioContext from '../../context/context';
-import ProjectImg from '../Image/ProjectImg';
-import Title from '../Title/Title';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 const Projects = () => {
   const { projects } = useContext(PortfolioContext);
 
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    if (window.innerWidth > 769) {
-      setIsDesktop(true);
-      setIsMobile(false);
-    } else {
-      setIsMobile(true);
-      setIsDesktop(false);
-    }
-  }, []);
+  const codePreviews = {
+    'Flappy Bird Engine': [
+      'class Bird extends Entity {',
+      '  void update(float dt) {',
+      '    velocity += gravity * dt;',
+      '    position.y += velocity;',
+      '  }',
+      '}',
+    ],
+    'Algorithm Sandbox': [
+      'def binary_search(arr, target):',
+      '    lo, hi = 0, len(arr) - 1',
+      '    while lo <= hi:',
+      '        mid = (lo + hi) // 2',
+      '        if arr[mid] == target:',
+      '            return mid',
+      '    return -1',
+    ],
+  };
 
   return (
-    <section id="projects">
-      <Container>
-        <div className="project-wrapper">
-          <Title title="Projects" />
+    <section id="projects" className="projects">
+      <div className="projects__container">
+        <motion.div
+          className="projects__header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="projects__label">Featured work</span>
+          <h2 className="projects__title">Projects</h2>
+        </motion.div>
+
+        <motion.div
+          className="projects__grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+        >
           {projects.map((project) => {
-            const { title, info, info2, url, repo, img, id } = project;
+            const { title, info, info2, url, repo, id } = project;
+            const preview = codePreviews[title] || codePreviews['Algorithm Sandbox'];
 
             return (
-              <Row key={id}>
-                <Col lg={4} sm={12}>
-                  <Fade
-                    left={isDesktop}
-                    bottom={isMobile}
-                    duration={1000}
-                    delay={500}
-                    distance="30px"
-                  >
-                    <div className="project-wrapper__text">
-                      <h3 className="project-wrapper__text-title">{title || 'Project Title'}</h3>
-                      <div>
-                        <p>
-                          {info ||
-                            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi neque, ipsa animi maiores repellendu distinctioaperiam earum dolor voluptatum consequatur blanditiis inventore debitis fuga numquam voluptate architecto itaque molestiae.'}
-                        </p>
-                        <p className="mb-4">{info2 || ''}</p>
+              <motion.div key={id} className="project-card" variants={cardVariants}>
+                <div className="project-card__terminal">
+                  <div className="project-card__terminal-dots">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <span className="project-card__terminal-title">{title}.java</span>
+                </div>
+
+                <div className="project-card__content">
+                  <h3 className="project-card__title">{title}</h3>
+                  <p className="project-card__subtitle">{info2}</p>
+                  <p className="project-card__description">{info}</p>
+
+                  <div className="project-card__code-preview">
+                    {preview.map((line, idx) => (
+                      <div key={idx} className="project-card__code-line">
+                        {line}
                       </div>
-                      {url && (
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="cta-btn cta-btn--hero"
-                          href={url}
-                        >
-                          See Live
-                        </a>
-                      )}
-                      {repo && (
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="cta-btn text-color-main"
-                          href={repo}
-                        >
-                          Source Code
-                        </a>
-                      )}
-                    </div>
-                  </Fade>
-                </Col>
-                <Col lg={8} sm={12}>
-                  <Fade
-                    right={isDesktop}
-                    bottom={isMobile}
-                    duration={1000}
-                    delay={1000}
-                    distance="30px"
-                  >
-                    <div className="project-wrapper__image">
+                    ))}
+                  </div>
+
+                  <div className="project-card__links">
+                    {repo && (
                       <a
-                        href={repo || '#!'}
+                        href={repo}
                         target="_blank"
-                        aria-label="Project Link"
                         rel="noopener noreferrer"
+                        className="project-card__link project-card__link--primary"
                       >
-                        <Tilt
-                          options={{
-                            reverse: false,
-                            max: 8,
-                            perspective: 1000,
-                            scale: 1,
-                            speed: 300,
-                            transition: true,
-                            axis: null,
-                            reset: true,
-                            easing: 'cubic-bezier(.03,.98,.52,.99)',
-                          }}
-                        >
-                          <div data-tilt className="thumbnail rounded">
-                            <ProjectImg alt={title} filename={img} />
-                          </div>
-                        </Tilt>
+                        <Github size={16} />
+                        <span>Source</span>
                       </a>
-                    </div>
-                  </Fade>
-                </Col>
-              </Row>
+                    )}
+                    {url && (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-card__link"
+                      >
+                        <ExternalLink size={16} />
+                        <span>Live</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
             );
           })}
-        </div>
-      </Container>
+        </motion.div>
+      </div>
     </section>
   );
 };
