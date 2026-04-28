@@ -1,33 +1,41 @@
 import React, { useContext } from 'react';
-import { Container } from 'react-bootstrap';
-import Fade from 'react-reveal/Fade';
+import { motion } from 'framer-motion';
+import { Mail, ArrowRight } from 'lucide-react';
 import PortfolioContext from '../../context/context';
-import Title from '../Title/Title';
 
 const Contact = () => {
   const { contact } = useContext(PortfolioContext);
   const { cta, btn, email } = contact;
 
   return (
-    <section id="contact">
-      <Container>
-        <Title title="Contact" />
-        <Fade bottom duration={1000} delay={800} distance="30px">
-          <div className="contact-wrapper">
-            <p className="contact-wrapper__text">
-              {cta || 'Would you like to work with me? Awesome!'}
-            </p>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-btn cta-btn--resume"
-              href={email ? `mailto:${email}` : '#'}
-            >
-              {btn || "Let's Talk"}
-            </a>
-          </div>
-        </Fade>
-      </Container>
+    <section id="contact" className="contact">
+      <motion.div
+        className="contact__container"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <span className="contact__label">Get in touch</span>
+        <h2 className="contact__title">Let's Work Together</h2>
+        <p className="contact__description">
+          {cta || "I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology."}
+        </p>
+
+        <a
+          href={email ? `mailto:${email}` : '#'}
+          className="contact__magnetic-btn"
+        >
+          <Mail size={20} />
+          <span>{btn || 'Email Me'}</span>
+          <ArrowRight size={20} />
+        </a>
+
+        <p className="contact__email">
+          Or reach me directly at{' '}
+          <a href={`mailto:${email}`}>{email || 'tyler7nguyen@duck.com'}</a>
+        </p>
+      </motion.div>
     </section>
   );
 };
