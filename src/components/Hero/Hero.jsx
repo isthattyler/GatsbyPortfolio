@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
 import { FaArrowRight } from 'react-icons/fa';
-import { Link } from 'react-scroll';
-import AboutImg from '../Image/AboutImg';
 
 const TypewriterText = ({ texts, delay = 0 }) => {
   const [displayText, setDisplayText] = useState('');
@@ -48,7 +46,7 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.15,
-      delayChildren: delay,
+      delayChildren: 0.3,
     },
   },
 };
