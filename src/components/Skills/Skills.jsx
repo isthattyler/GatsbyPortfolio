@@ -52,8 +52,7 @@ const Skills = () => {
         <motion.div
           className="skills__header"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span className="skills__label">What I work with</span>
@@ -64,8 +63,7 @@ const Skills = () => {
           className="skills__grid"
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
+          animate="visible"
         >
           {skillsData.map((group, groupIndex) => (
             <motion.div

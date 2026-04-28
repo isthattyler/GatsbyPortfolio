@@ -40,7 +40,7 @@ const imageVariants = {
 
 const About = () => {
   const { about } = React.useContext(PortfolioContext);
-  const { img, paragraphOne, paragraphTwo, paragraphThree, resume } = about;
+  const { img, paragraphOne, paragraphTwo, paragraphThree, resume } = about || {};
 
   const [isDesktop, setIsDesktop] = useState(false);
 
@@ -59,8 +59,7 @@ const About = () => {
         className="about__container"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
+        animate="visible"
       >
         <motion.div className="about__content" variants={itemVariants}>
           <span className="about__intro">About me</span>

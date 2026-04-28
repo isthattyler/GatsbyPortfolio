@@ -55,8 +55,7 @@ const Projects = () => {
         <motion.div
           className="projects__header"
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <span className="projects__label">Featured work</span>
@@ -67,8 +66,7 @@ const Projects = () => {
           className="projects__grid"
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
+          animate="visible"
         >
           {projects.map((project) => {
             const { title, info, info2, url, repo, id } = project;

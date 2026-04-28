@@ -5,15 +5,14 @@ import PortfolioContext from '../../context/context';
 
 const Contact = () => {
   const { contact } = useContext(PortfolioContext);
-  const { cta, btn, email } = contact;
+  const { cta, btn, email } = contact || {};
 
   return (
     <section id="contact" className="contact">
       <motion.div
         className="contact__container"
         initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         <span className="contact__label">Get in touch</span>
