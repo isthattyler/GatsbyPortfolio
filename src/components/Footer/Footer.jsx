@@ -5,13 +5,13 @@ import PortfolioContext from '../../context/context';
 
 const Footer = () => {
   const { footer } = useContext(PortfolioContext);
-  const { networks } = footer;
+  const { networks } = footer || {};
 
   return (
     <footer className="footer">
       <div className="footer__container">
         <div className="footer__social">
-          {networks.map((network) => {
+          {networks && networks.map((network) => {
             const { id, name, url } = network;
             const Icon = name === 'github' ? FaGithub : FaLinkedin;
 
