@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { aboutData, contactData, footerData, heroData, projectsData } from '../content/data';
 import { PortfolioProvider } from '../context/context';
+import Navigation from './Navigation/Navigation';
+import Hero from './Hero/Hero';
 import About from './About/About';
+import Skills from './Skills/Skills';
+import Projects from './Projects/Projects';
 import Contact from './Contact/Contact';
 import Footer from './Footer/Footer';
-import Hero from './Hero/Hero';
-import Projects from './Projects/Projects';
+import { aboutData, contactData, footerData, heroData, projectsData } from '../content/data';
 
 function App() {
   const [hero, setHero] = useState({});
@@ -24,8 +26,10 @@ function App() {
 
   return (
     <PortfolioProvider value={{ hero, about, projects, contact, footer }}>
+      <Navigation />
       <Hero />
       <About />
+      <Skills />
       <Projects />
       <Contact />
       <Footer />

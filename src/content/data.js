@@ -1,13 +1,11 @@
 import { nanoid } from 'nanoid';
 
-// HEAD DATA
 export const headData = {
-  title: 'Tyler | Developer',
+  title: 'Tyler | Software Engineer',
   lang: 'en',
-  description: 'Welcome to my website',
+  description: 'Backend-focused Software Engineer specializing in Java, Python, and scalable systems.',
 };
 
-// HERO DATA
 export const heroData = {
   title: '',
   name: 'Tyler',
@@ -15,53 +13,44 @@ export const heroData = {
   cta: '',
 };
 
-// ABOUT DATA
 export const aboutData = {
   img: 'profile.jpg',
-  paragraphOne: "I'm a UConn graduate and a Software Engineer with a focus on Backend Development.",
+  paragraphOne:
+    "I'm a backend-focused software engineer who enjoys turning complex problems into clean, reliable systems. I work primarily with Java and Python, building APIs and services that handle real traffic.",
   paragraphTwo:
-    'I like to build applications and learn new technology to grow professionally in the technology field.',
-  paragraphThree: 'Feel free to reach out to me anytime via email.',
+    "When I'm not deep in Spring Boot configs, I'm probably refining a database schema or writing scripts to automate the boring stuff. Currently working at Optum as a Software Engineer.",
+  paragraphThree:
+    "Feel free to reach out anytime — I'm always open to discussing new projects or opportunities.",
   resume: 'https://shorturl.at/eiI45',
 };
 
-// PROJECTS DATA
 export const projectsData = [
   {
     id: nanoid(),
-    img: 'FlappyBird.png',
-    title: 'Flappy Bird Clone',
-    info: 'My own implementation of the popular Flappy Bird game',
-    info2: 'Utilized: Java, Java Swing Framework, Maven',
+    title: 'Flappy Bird Engine',
+    info: 'A custom game loop built from scratch in Java. Implemented physics-based movement, collision detection, and procedural pipe generation without relying on external game libraries.',
+    info2: 'Java, Java Swing, Maven',
     url: '',
     repo: 'https://github.com/isthattyler/FlappyBird',
   },
   {
     id: nanoid(),
-    img: 'project.jpg',
-    title: 'Interview Problem',
-    info: 'Solving coding problems',
-    info2: 'Utilized: Python',
+    title: 'Algorithm Sandbox',
+    info: 'A collection of coding challenges solved with clean, efficient Python. Covers sorting algorithms, dynamic programming, tree traversals, and graph theory problems with detailed explanations.',
+    info2: 'Python, Algorithms',
     url: '',
     repo: 'https://github.com/isthattyler/InterviewProblem',
   },
 ];
 
-// CONTACT DATA
 export const contactData = {
-  cta: '',
+  cta: "I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology.",
   btn: 'Email Me',
-  email: 'tyler.t.nguyen@uconn.edu',
+  email: 'tyler7nguyen@duck.com',
 };
 
-// FOOTER DATA
 export const footerData = {
   networks: [
-    {
-      id: nanoid(),
-      name: 'instagram',
-      url: 'https://www.instagram.com/isthatthinh/',
-    },
     {
       id: nanoid(),
       name: 'linkedin',
@@ -75,7 +64,6 @@ export const footerData = {
   ],
 };
 
-// Github start/fork buttons
 export const githubButtons = {
-  isEnabled: false, // set to false to disable the GitHub stars/fork buttons
+  isEnabled: false,
 };
